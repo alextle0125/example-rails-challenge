@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= number_to_currency(@credit_card_charge.amount) %>
+</p>
+
+<p>
+  <strong>Unique code:</strong>
+  <%= @credit_card_charge.unique_code %>
+</p>
+
+<p>
+  <strong>Paid:</strong>
+  <%= @credit_card_charge.paid %>
+</p>
+
+<p>
+  <strong>Refunded:</strong>
+  <%= @credit_card_charge.refunded %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <% if @credit_card_charge.user %>
+    <%= @credit_card_charge.user.first_name %> <%= @credit_card_charge.user.last_name %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <% if @credit_card_charge.company %>
+    <%= @credit_card_charge.company.name %> - Zip Code: <%= @credit_card_charge.company.zip_code %>
+  <% end %>
+</p>
+
+<%= link_to 'Back', charges_path, 'data-no-turbolink' => true %>

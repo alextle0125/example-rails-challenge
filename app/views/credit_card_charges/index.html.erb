@@ -1,0 +1,63 @@
+
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Failed Charges</a></li>
+    <li><a href="#tabs-2">Disputed Charges</a></li>
+    <li><a href="#tabs-3">Successful Charges</a></li>
+  </ul>
+  <div id="tabs-1">
+    <ol>
+      <% @failed_charges.each do |charge| %>
+        <% if charge.user %>
+          <li class="charges">
+            <%= charge.user.first_name %> <%= charge.user.last_name %> - <%= number_to_currency(charge.amount) %> - <%= charge.created_at %>
+            <%= link_to "#{charge.unique_code}", credit_card_charge_path(charge.id) %>
+          </li>
+        <% elsif charge.company %>
+          <li class="charges">
+            <%= charge.company.name %> - <%= number_to_currency(charge.amount) %> - <%= charge.created_at %>
+            <%= link_to "#{charge.unique_code}", credit_card_charge_path(charge.id) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+  </div>
+  <div id="tabs-2">
+    <ol>
+      <% @disputed_charges.each do |charge| %>
+        <% if charge.user %>
+          <li class="charges">
+            <%= charge.user.first_name %> <%= charge.user.last_name %> - <%= number_to_currency(charge.amount) %> - <%= charge.created_at %>
+            <%= link_to "#{charge.unique_code}", credit_card_charge_path(charge.id) %>
+          </li>
+        <% elsif charge.company %>
+          <li class="charges">
+            <%= charge.company.name %> - <%= number_to_currency(charge.amount) %> - <%= charge.created_at %>
+            <%= link_to "#{charge.unique_code}", credit_card_charge_path(charge.id) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+  </div>
+  <div id="tabs-3">
+    <ol>
+      <% @successful_charges.each do |charge| %>
+        <% if charge.user %>
+          <li class="charges">
+            <%= charge.user.first_name %> <%= charge.user.last_name %> - <%= number_to_currency(charge.amount) %> - <%= charge.created_at %>
+            <%= link_to "#{charge.unique_code}", credit_card_charge_path(charge.id) %>
+          </li>
+        <% elsif charge.company %>
+          <li class="charges">
+            <%= charge.company.name %> - <%= number_to_currency(charge.amount) %> - <%= charge.created_at %>
+            <%= link_to "#{charge.unique_code}", credit_card_charge_path(charge.id) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+  </div>
+</div>
+
+<%= pie_chart [{label: 'Failed Charges', data: @failed_charges.count}, {label: 'Disputed Charges', data: @disputed_charges.count}, {label: 'Successful Charges', data: @successful_charges.count}] %>
+
+<%= link_to 'New Credit card charge', new_credit_card_charge_path %>

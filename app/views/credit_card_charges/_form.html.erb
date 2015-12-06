@@ -1,0 +1,29 @@
+<%= form_for(@credit_card_charge) do |f| %>
+  <% if @credit_card_charge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@credit_card_charge.errors.count, "error") %> prohibited this credit_card_charge from being saved:</h2>
+
+      <ul>
+      <% @credit_card_charge.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br>
+    <%=f.select :user_id, @users, :include_blank => true %><br />
+  </div>
+  <div class="field">
+    <%= f.label :company %><br>
+    <%=f.select :company_id, @companies, :include_blank => true %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
